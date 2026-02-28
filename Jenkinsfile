@@ -16,7 +16,7 @@ pipeline {
 
         stage("Build Image") {
             steps {
-              sh "docker build -t ${DOCKER_HUB_REPO}:${TAG} ."
+              sh "docker buil -t ${DOCKER_HUB_REPO}:${TAG} ."
             }
         }
 
