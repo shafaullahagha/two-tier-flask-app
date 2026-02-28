@@ -51,20 +51,23 @@ pipeline {
             }
         }
     }
-post {
-    success {
-        emailtext(
-            subject: "Build Successful",
-            body: "Good News: Your build was successful!",
-            to: "shafaullahagha@gmail.com"
-        )
-    }
-    failure {
-         emailtext(
-            subject: "Build Failed",
-            body: "Bad News: Your build Failed!",
-            to: "shafaullahagha@gmail.com"
-        )
-    }
-}    
+    
+post{
+        success{
+            script{
+                emailtext from: "shafaullahagha@gmail.com",
+                to: "shafaullahagha@gmail.com",
+                body: "Build Successfuly",
+                subject: "Jenkins Build successful"   
+             }        
+        }
+        failure{
+            script{
+                emailtext from: "shafaullahagha@gmail.com",
+                to: "shafaullahagha@gmail.com"
+                body: "Build Failed",
+                subject: "Jenkins Build Failed"
+            }
+        }
+    }    
 }
