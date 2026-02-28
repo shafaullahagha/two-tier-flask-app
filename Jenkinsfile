@@ -55,7 +55,7 @@ pipeline {
 post{
         success{
             script{
-                emailtext from: "shafaullahagha@gmail.com",
+                emailext from: "shafaullahagha@gmail.com",
                 to: "shafaullahagha@gmail.com",
                 body: "Build Successfuly",
                 subject: "Jenkins Build successful"   
@@ -63,7 +63,7 @@ post{
         }
         failure{
             script{
-                emailtext from: "shafaullahagha@gmail.com",
+                emailext from: "shafaullahagha@gmail.com",
                 to: "shafaullahagha@gmail.com",
                 body: "Build Failed",
                 subject: "Jenkins Build Failed"
