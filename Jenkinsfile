@@ -64,7 +64,7 @@ post{
         failure{
             script{
                 emailtext from: "shafaullahagha@gmail.com",
-                to: "shafaullahagha@gmail.com"
+                to: "shafaullahagha@gmail.com",
                 body: "Build Failed",
                 subject: "Jenkins Build Failed"
             }
