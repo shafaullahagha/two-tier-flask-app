@@ -13,6 +13,11 @@ pipeline {
                 git url: "https://github.com/shafaullahagha/two-tier-flask-app.git", branch: "master"
             }
         }
+        stage("Trivy File System Scan"){
+            steps{
+                sh "trivy fs . -o results.json"
+            }
+        }
 
         stage("Build Image") {
             steps {
@@ -63,7 +68,7 @@ post{
         }
         failure{
             script{
-                emailext from: "shafaullahagha@gmail.com",
+                emailext attachLog: true,
                 to: "shafaullahagha@gmail.com",
                 body: "Build Failed",
                 subject: "Jenkins Build Failed"
