@@ -39,7 +39,7 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 script{
-                    docker_push("dockerHubCreds","flask-app","${BUILD_NUMBER}" )
+                    docker_push("dockerHubCreds","flask-app","${BUILD_NUMBER}")
                 }
             }
         }
