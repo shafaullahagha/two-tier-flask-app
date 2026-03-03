@@ -3,8 +3,8 @@ pipeline {
     agent {label "dev"};
 
     environment {
-        DOCKER_HUB_REPO = "shafaullahagha/flask-app"
-        TAG = "${BUILD_NUMBER}"
+        docker_hub_repo = "shafaullahagha/flask-app"
+        tag = "${BUILD_NUMBER}"
     }
 
     stages {
@@ -26,7 +26,7 @@ pipeline {
 
         stage("Build Image") {
             steps {
-              sh "docker build -t ${DOCKER_HUB_REPO}:${TAG} ."
+              sh "docker build -t ${docker_hub_repo}:${tag} ."
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 script{
-                    docker_push("dockerHubCreds","DOCKER_HUB_REPO","TAG" )
+                    docker_push("dockerHubCreds","docker_hub_repo","tag" )
                 }
             }
         }
