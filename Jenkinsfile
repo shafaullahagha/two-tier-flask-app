@@ -18,7 +18,9 @@ pipeline {
         }
         stage("Trivy File System Scan"){
             steps{
-                sh "trivy fs . -o results.json"
+                script{
+                    trivy_fs()
+                }
             }
         }
 
@@ -36,16 +38,8 @@ pipeline {
 
         stage("Push to Docker Hub") {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: "dockerHubCreds",
-                    usernameVariable: "DOCKER_USER",
-                    passwordVariable: "DOCKER_PASS"
-                )]) {
-
-                    sh """
-                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker push ${DOCKER_HUB_REPO}:${TAG}
-                    """
+                script{
+                    docker_push("dockerHubCreds","DOCKER_HUB_REPO","TAG" )
                 }
             }
         }
