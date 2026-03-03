@@ -11,7 +11,9 @@ pipeline {
 
         stage("Code Clone") {
             steps {
+                script{
                 clone("https://github.com/shafaullahagha/two-tier-flask-app.git", "master")
+                }    
             }
         }
         stage("Trivy File System Scan"){
