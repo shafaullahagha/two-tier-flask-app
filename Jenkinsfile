@@ -2,11 +2,6 @@
 pipeline {
     agent {label "dev"};
 
-    environment {
-        docker_hub_repo = "shafaullahagha/flask-app"
-        tag = "${BUILD_NUMBER}"
-    }
-
     stages {
 
         stage("Code Clone") {
@@ -26,7 +21,7 @@ pipeline {
 
         stage("Build Image") {
             steps {
-              sh "docker build -t ${docker_hub_repo}:${tag} ."
+              sh "docker build -t shafaullahagha/flask-app:latest ."
             }
         }
 
@@ -39,7 +34,7 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 script{
-                    docker_push("dockerHubCreds","flask-app","${BUILD_NUMBER}")
+                    docker_push("dockerHubCreds","flask-app")
                 }
             }
         }
